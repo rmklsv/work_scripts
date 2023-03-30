@@ -1,10 +1,17 @@
+import shutil
 import openpyxl
 from openpyxl.utils import range_boundaries
+
+# Create backup
+s_path = r"path_to_the_file\source_file.xlsx"
+d_path = r"path_to_the_file\source_file_backup.xlsx"
+shutil.copy(s_path, d_path)
+print("Backup file created")
 
 source_wb = openpyxl.load_workbook("path_to_the_file/source_file.xlsx", data_only=True)
 source_ws = source_wb.active
 
-dest_wb = openpyxl.load_workbook("path_to_the_file/dest_file.xlsx")
+dest_wb = openpyxl.load_workbook("path_to_the_file/dest_file.xlsx", data_only=True)
 dest_ws = dest_wb.active
 
 row_numbers = input("Enter the rows "
@@ -51,3 +58,4 @@ for row_number in row_numbers:
         dest_ws.append(values)
 
 dest_wb.save("path_to_the_file/dest_file.xlsx")
+print("Sucessfully updated")
